@@ -24,17 +24,19 @@ public class Main {
 //        System.out.println(game.getShuffledCards().get(0));
         System.out.println();
         System.out.println("getting player one cards...");
-        System.out.println(playerOne.getPlayerCards());
         game.distributeCardsToPlayer(playerOne, 2);
-        System.out.println("getting player one cards...");
-        System.out.println(playerOne.getPlayerCards());
-        System.out.println();
-        System.out.println("getting shuffled cards...");
-        System.out.println(game.getShuffledCards());
-
+        System.out.println(playerOne.getPlayerCards().stream().mapToInt(Card -> Card.getValue()).sum());
+//        System.out.println("getting player one cards...");
+//        System.out.println(playerOne.getPlayerCards());
 //        System.out.println();
-//        System.out.println("serving player two");
-//        game.distributeCardsToPlayer(playerTwo);
+//        System.out.println("getting shuffled cards...");
+//        System.out.println(game.getShuffledCards());
+
+        System.out.println();
+        System.out.println("**********");
+        game.distributeCardsToPlayer(game.playersInTheGame.get(0), 2);
+        System.out.println("getting the number of cards in Player One's possession");
+        System.out.println(game.playersInTheGame.get(0).getPlayerCards());
 //        System.out.println("getting player two cards...");
 //        System.out.println(playerTwo.getPlayerCards());
 //        System.out.println();
