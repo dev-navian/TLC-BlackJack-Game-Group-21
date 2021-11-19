@@ -23,13 +23,12 @@ public class Card {
                 '}';
     }
 
-//
-//    public void setSuit(Suit suit) {
-//        this.suit = suit;
-//    }
-//
-//
-//    public void setValue(Value value) {
-//        this.value = value;
-//    }
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
+
+
+    public void setValue(int value) {
+        this.value = value;
+    }
 }
