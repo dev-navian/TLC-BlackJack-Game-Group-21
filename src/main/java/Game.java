@@ -23,7 +23,7 @@ public class Game {
     }
 
     // distributing the cards (Player)
-    public void distributeCardsToPlayer(Player player, int numberOfCards) {
+    public void dealCardsToPlayer(Player player, int numberOfCards) {
 
         if (numberOfCards == 2) {
             player.setPlayerCards(
@@ -34,7 +34,7 @@ public class Game {
             // removing the second card from the deck of shuffled cards
             removeCards();
         } else if (numberOfCards == 1) {
-            player.getPlayerCards().add(getShuffledCards().get(0));
+            player.addCardToPlayerCards(getShuffledCards().get(0));
             removeCards();
         } else {
             System.out.println("Can only deal 1 or 2 cards");
@@ -50,6 +50,56 @@ public class Game {
     // get a player's total score
     public int getPlayerTotalScore(Player player) {
         return player.getPlayerCards().stream().mapToInt(Card -> Card.getValue()).sum();
+    }
+
+    // evaluate the scores of each player
+    public void evaluatePlayerScores() {
+
+        playersInTheGame.forEach(player -> {
+            int playerScore = getPlayerTotalScore(player);
+            System.out.println(playerScore);
+
+            if (playerScore <= 21) {
+
+                if (playerScore == 21) {
+//                    System.out.println(player.getName() + " wins...");
+                    player.setPlayerStatus(PlayerStatus.WIN);
+                    evaluatePlayerStatus(player);
+                } else if (playerScore >= 17) {
+//                    System.out.println(player.getName() + " sticks...");
+                    player.setPlayerStatus(PlayerStatus.STICK);
+                    evaluatePlayerStatus(player);
+                } else {
+//                    System.out.println(player.getName() + " hits...");
+                    player.setPlayerStatus(PlayerStatus.HIT);
+                    evaluatePlayerStatus(player);
+//                    dealCardsToPlayer(player, 1);
+//                    evaluatePlayerScores();
+                }
+            } else {
+                System.out.println(player.getName() + " goes bust...");
+                player.setPlayerStatus(PlayerStatus.GO_BUST);
+                evaluatePlayerStatus(player);
+            }
+
+            System.out.println("---------------");
+        });
+
+    }
+
+    // check player status
+    public void evaluatePlayerStatus(Player player) {
+        switch (player.getPlayerStatus()) {
+            case WIN -> System.out.println("wins");
+            case GO_BUST -> System.out.println("go bust");
+            case STICK -> System.out.println("sticks");
+            case HIT -> {
+                System.out.println("hits");
+                dealCardsToPlayer(player, 4);
+            }
+            default -> System.out.println("");
+        }
+
     }
 
 
