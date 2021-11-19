@@ -4,8 +4,6 @@ import java.util.List;
 
 public class Deck {
     private List<Card> deckOfCards;
-    private Suit suit;
-    private Value value;
 
     public Deck() {
         this.deckOfCards = new ArrayList<>();
@@ -19,7 +17,7 @@ public class Deck {
 
     // get deck of cards
     public List<Card> getDeckOfCards() {
-        return deckOfCards;
+        return this.deckOfCards;
     }
 
 }
